@@ -5,6 +5,7 @@ import { CheckCircle2, AlertCircle, Loader2, ArrowRight, ShieldCheck, Mail, Zap,
 
 export default function AuditPage() {
   const [formData, setFormData] = useState({
+    name: "",
     businessName: "",
     websiteUrl: "",
     email: "",
@@ -29,6 +30,13 @@ export default function AuditPage() {
     setErrorMessage("");
 
     // Quick client-side validation
+    if (!formData.name.trim() || formData.name.trim().length < 2) {
+      setErrorMessage("Please enter your name.");
+      setStatus("error");
+      setLoading(false);
+      return;
+    }
+
     if (!formData.businessName.trim() || formData.businessName.trim().length < 2) {
       setErrorMessage("Please enter your business name.");
       setStatus("error");
@@ -65,6 +73,7 @@ export default function AuditPage() {
 
       setStatus("success");
       setFormData({
+        name: "",
         businessName: "",
         websiteUrl: "",
         email: "",
@@ -149,6 +158,26 @@ export default function AuditPage() {
                         </div>
                       </div>
                     )}
+
+                    {/* Name */}
+                    <div>
+                      <label
+                        htmlFor="name"
+                        className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2"
+                      >
+                        Your Name <span className="text-rose-500">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        required
+                        value={formData.name}
+                        onChange={handleChange}
+                        placeholder="Jane Smith"
+                        className="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition"
+                      />
+                    </div>
 
                     {/* Business Name */}
                     <div>

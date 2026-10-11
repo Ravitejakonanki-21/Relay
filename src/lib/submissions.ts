@@ -26,6 +26,25 @@ export async function saveSubmission(
 
     submissionsMemoryStore.push(submission);
 
+    // Save to local data/submissions.json file for instant review
+    try {
+      const fs = await import("fs/promises");
+      const path = await import("path");
+      const dataDir = path.join(process.cwd(), "data");
+      const filePath = path.join(dataDir, "submissions.json");
+      let existing: SubmissionData[] = [];
+      try {
+        const fileContent = await fs.readFile(filePath, "utf-8");
+        existing = JSON.parse(fileContent);
+      } catch {
+        existing = [];
+      }
+      existing.unshift(submission);
+      await fs.writeFile(filePath, JSON.stringify(existing, null, 2), "utf-8");
+    } catch (fsErr) {
+      console.warn("[Submission] Local file storage error:", fsErr);
+    }
+
     // Optional Supabase integration if environment variables are provided
     const supabaseUrl = process.env.SUPABASE_URL;
     const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;

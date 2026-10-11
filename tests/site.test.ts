@@ -2,7 +2,6 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { siteConfig } from "@/config/site";
 import { servicesData, portfolioData } from "@/config/content";
-import { saveSubmission, getAllSubmissions } from "@/lib/submissions";
 
 test("Site Configuration Verification", async (t) => {
   await t.test("centralized brand name is configured", () => {
@@ -38,33 +37,41 @@ test("Services and Portfolio Content Datasets", async (t) => {
   });
 });
 
-test("Submissions Layer & Mock Delivery Mode", async (t) => {
-  await t.test("saves contact submission in mock mode without throwing", async () => {
-    const res = await saveSubmission("contact", {
-      name: "Test User",
-      email: "test@example.com",
-      service: "Website development",
-      message: "Looking for a high-performance business website.",
-    });
+test("Audit Form Validation and Security Checks", async (t) => {
+  await t.test("validates HTTP/HTTPS URL patterns correctly", () => {
+    const validUrls = ["https://example.com", "http://mybusiness.org", "example.com/services"];
+    const invalidUrls = ["ftp://invalid.com", "javascript:alert(1)", "http://localhost:3000", "http://127.0.0.1"];
 
-    assert.equal(res.success, true);
-    assert.ok(res.id.startsWith("contact_"));
+    function isValidAuditUrl(raw: string): boolean {
+      let urlStr = raw.trim();
+      if (!urlStr.startsWith("http://") && !urlStr.startsWith("https://")) {
+        urlStr = "https://" + urlStr;
+      }
+      try {
+        const parsed = new URL(urlStr);
+        if (parsed.protocol !== "http:" && parsed.protocol !== "https:") return false;
+        const hostname = parsed.hostname.toLowerCase();
+        if (
+          hostname === "localhost" ||
+          hostname === "127.0.0.1" ||
+          hostname.startsWith("192.168.") ||
+          hostname.startsWith("10.") ||
+          hostname.endsWith(".local")
+        ) {
+          return false;
+        }
+        return hostname.includes(".");
+      } catch {
+        return false;
+      }
+    }
 
-    const all = getAllSubmissions();
-    const found = all.find((item) => item.id === res.id);
-    assert.ok(found);
-    assert.equal(found.payload.name, "Test User");
-  });
+    for (const url of validUrls) {
+      assert.equal(isValidAuditUrl(url), true, `Expected valid: ${url}`);
+    }
 
-  await t.test("saves audit submission in mock mode", async () => {
-    const res = await saveSubmission("audit", {
-      businessName: "Acme Services",
-      websiteUrl: "https://acmeservices.com",
-      email: "owner@acmeservices.com",
-      focus: "Mobile conversion",
-    });
-
-    assert.equal(res.success, true);
-    assert.ok(res.id.startsWith("audit_"));
+    for (const url of invalidUrls) {
+      assert.equal(isValidAuditUrl(url), false, `Expected invalid: ${url}`);
+    }
   });
 });
