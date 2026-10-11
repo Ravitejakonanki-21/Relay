@@ -192,8 +192,9 @@ export async function POST(request: Request) {
 
     if (adminEmailResult.error) {
       console.error("[Resend Admin Email Failed]:", adminEmailResult.error);
+      const detail = adminEmailResult.error.message || "Failed to deliver email.";
       return NextResponse.json(
-        { error: "Could not deliver your audit request to our engineering team. Please try again or email us directly." },
+        { error: `Email delivery failed: ${detail}` },
         { status: 502 }
       );
     }
