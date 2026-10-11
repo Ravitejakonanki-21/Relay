@@ -77,9 +77,9 @@ export const siteConfig: BrandConfig = {
     linkedin: "https://linkedin.com",
     github: "https://github.com",
   },
-  targetMarket: "Small and medium-sized businesses in the United States and globally",
+  targetMarket: "Small and medium-sized businesses all over the world",
   geographicServiceStatement:
-    "Serving businesses in the United States — expanding internationally",
+    "Serving businesses all over the world",
   serviceAvailability: {
     websiteDevelopment: {
       status: "available_now",
