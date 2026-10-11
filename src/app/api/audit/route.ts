@@ -124,7 +124,7 @@ export async function POST(request: Request) {
 
     // 5. Environment configuration
     const resendApiKey = process.env.RESEND_API_KEY;
-    const auditNotificationEmail = process.env.AUDIT_NOTIFICATION_EMAIL || process.env.NOTIFICATION_EMAIL;
+    const auditNotificationEmail = process.env.AUDIT_NOTIFICATION_EMAIL || process.env.NOTIFICATION_EMAIL || "relaystudio.team@gmail.com";
     const resendFromEmail = process.env.RESEND_FROM_EMAIL || "Relay Audits <onboarding@resend.dev>";
 
     if (!resendApiKey) {

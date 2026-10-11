@@ -55,7 +55,7 @@ export const siteConfig: BrandConfig = {
   heroHeadline: "Websites that win customers. Agents that answer your calls.",
   heroSubheadline:
     "Relay designs fast, professional websites for small and medium-sized businesses — and inbound AI voice agents that answer every call, capture every lead, and book appointments while you work.",
-  contactEmail: "hello@relaydigital.co",
+  contactEmail: "relaystudio.team@gmail.com",
   phoneDisplay: "(800) 555-0199",
   phoneHref: "tel:+18005550199",
   websiteUrl: "https://relaydigital.co",
