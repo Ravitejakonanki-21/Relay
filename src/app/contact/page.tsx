@@ -1,7 +1,20 @@
 "use client";
 
 import React, { useState } from "react";
-import { CheckCircle2, AlertCircle, Loader2, ArrowRight, Mail, Clock } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import {
+  CheckCircle2,
+  AlertCircle,
+  Loader2,
+  ArrowRight,
+  Mail,
+  Phone,
+  Clock,
+  Sparkles,
+  ShieldCheck,
+  Send,
+} from "lucide-react";
 import { siteConfig } from "@/config/site";
 
 export default function ContactPage() {
@@ -30,7 +43,7 @@ export default function ContactPage() {
     setStatus("idle");
     setErrorMessage("");
 
-    // Quick client-side validation
+    // Client-side validation
     if (!formData.name.trim() || formData.name.trim().length < 2) {
       setErrorMessage("Please enter your name (at least 2 characters).");
       setStatus("error");
@@ -93,107 +106,177 @@ export default function ContactPage() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Header */}
-      <section className="bg-slate-50/70 border-b border-slate-200/80 pt-16 pb-20 sm:pt-24 sm:pb-28">
+      {/* 1. HERO SECTION */}
+      <section className="bg-white border-b border-[#DCE5EF] pt-16 pb-20 sm:pt-24 sm:pb-28 relative overflow-hidden">
+        {/* Subtle grid pattern background */}
+        <div
+          className="absolute inset-0 bg-[linear-gradient(to_right,#F3F7FC_1px,transparent_1px),linear-gradient(to_bottom,#F3F7FC_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] -z-10"
+          aria-hidden="true"
+        />
+
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center max-w-3xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-semibold uppercase tracking-wider mb-6">
-            Get In Touch
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F3F7FC] border border-[#DCE5EF] text-[#123B63] text-xs font-semibold uppercase tracking-wider mb-6 shadow-xs">
+            <Sparkles className="h-3.5 w-3.5 text-[#2878D0]" />
+            <span>Get In Touch</span>
           </div>
-          <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
+
+          <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-[#102A43] leading-tight">
             What are you trying to improve or build?
           </h1>
-          <p className="mt-6 text-lg sm:text-xl text-slate-600 leading-relaxed">
+
+          <p className="mt-6 text-lg sm:text-xl text-[#66758A] leading-relaxed">
             Tell us about your project, goals, or current website bottlenecks. We respond with thoughtful feedback and clear pricing.
           </p>
         </div>
       </section>
 
-      {/* Main Contact Content */}
-      <section className="py-20 bg-white">
+      {/* 2. MAIN CONTACT CONTENT: TWO-COLUMN LAYOUT */}
+      <section className="py-20 sm:py-28 bg-[#F3F7FC]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             {/* Left Column: Direct Info & Expectations */}
             <div className="lg:col-span-5 space-y-8">
-              <div>
-                <h2 className="text-2xl font-bold text-slate-900 tracking-tight mb-3">
-                  Direct communication with engineers.
-                </h2>
-                <p className="text-base text-slate-600 leading-relaxed">
-                  No pushy sales reps or high-pressure pitches. Every message is reviewed directly by our technical team to evaluate feasibility, timing, and realistic scope.
-                </p>
+              {/* Supporting Consultation Card with Photography */}
+              <div className="card-corporate overflow-hidden bg-white shadow-sm border border-[#DCE5EF]">
+                <div className="relative h-48 sm:h-56 w-full overflow-hidden bg-slate-100 border-b border-[#DCE5EF]">
+                  <Image
+                    src="/images/contact-consultation.jpg"
+                    alt="Relay engineering consultation desk"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 40vw"
+                    className="object-cover"
+                  />
+                  <div className="absolute top-4 left-4">
+                    <span className="text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-[#102A43]/90 text-white backdrop-blur-xs">
+                      Direct Communication
+                    </span>
+                  </div>
+                </div>
+
+                <div className="p-6 sm:p-8 space-y-4">
+                  <h2 className="text-xl font-bold text-[#102A43] tracking-tight">
+                    Direct communication with engineers.
+                  </h2>
+                  <p className="text-sm text-[#66758A] leading-relaxed">
+                    No pushy sales reps or high-pressure pitches. Every message is reviewed directly by our technical team to evaluate feasibility, timing, and realistic scope.
+                  </p>
+                </div>
               </div>
 
-              <div className="space-y-6 pt-4 border-t border-slate-100">
-                <div className="flex items-start gap-4">
-                  <div className="h-10 w-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center flex-shrink-0">
+              {/* Verified Contact Details Cards */}
+              <div className="space-y-4">
+                <div className="card-corporate p-6 bg-white flex items-start gap-4">
+                  <div className="h-11 w-11 rounded-xl bg-[#F3F7FC] text-[#2878D0] flex items-center justify-center flex-shrink-0 border border-[#DCE5EF]">
                     <Mail className="h-5 w-5" />
                   </div>
                   <div>
-                    <h3 className="text-sm font-bold text-slate-900">Email Us Directly</h3>
+                    <h3 className="text-xs font-bold uppercase tracking-wider text-[#66758A]">
+                      Email Us Directly
+                    </h3>
                     <a
                       href={`mailto:${siteConfig.contactEmail}`}
-                      className="text-sm text-blue-600 hover:underline font-medium"
+                      className="text-base font-bold text-[#123B63] hover:text-[#2878D0] transition mt-0.5 block"
                     >
                       {siteConfig.contactEmail}
                     </a>
-                    <p className="text-xs text-slate-500 mt-0.5">
-                      Replies usually arrive within 24 business hours.
+                    <p className="text-xs text-[#66758A] mt-1">
+                      Replies arrive within 24 business hours.
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4">
-                  <div className="h-10 w-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center flex-shrink-0">
+                {siteConfig.phoneDisplay && siteConfig.phoneHref && (
+                  <div className="card-corporate p-6 bg-white flex items-start gap-4">
+                    <div className="h-11 w-11 rounded-xl bg-[#F3F7FC] text-[#2878D0] flex items-center justify-center flex-shrink-0 border border-[#DCE5EF]">
+                      <Phone className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <h3 className="text-xs font-bold uppercase tracking-wider text-[#66758A]">
+                        Telephone Inquiries
+                      </h3>
+                      <a
+                        href={siteConfig.phoneHref}
+                        className="text-base font-bold text-[#123B63] hover:text-[#2878D0] transition mt-0.5 block"
+                      >
+                        {siteConfig.phoneDisplay}
+                      </a>
+                      <p className="text-xs text-[#66758A] mt-1">
+                        Monday – Friday, standard business hours.
+                      </p>
+                    </div>
+                  </div>
+                )}
+
+                <div className="card-corporate p-6 bg-white flex items-start gap-4">
+                  <div className="h-11 w-11 rounded-xl bg-[#F3F7FC] text-[#2878D0] flex items-center justify-center flex-shrink-0 border border-[#DCE5EF]">
                     <Clock className="h-5 w-5" />
                   </div>
                   <div>
-                    <h3 className="text-sm font-bold text-slate-900">Typical Turnaround</h3>
-                    <p className="text-sm text-slate-600">
-                      Website projects typically range from 2 to 4 weeks depending on scope and deliverables.
+                    <h3 className="text-xs font-bold uppercase tracking-wider text-[#66758A]">
+                      Typical Turnaround
+                    </h3>
+                    <p className="text-sm font-semibold text-[#102A43] mt-0.5">
+                      2 to 4 weeks depending on scope
+                    </p>
+                    <p className="text-xs text-[#66758A] mt-1">
+                      Scoped proposal and clear deliverable timeline provided upfront.
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div className="rounded-2xl bg-slate-50 p-6 border border-slate-200">
-                <h3 className="text-sm font-bold text-slate-900 mb-2">Looking for an audit instead?</h3>
-                <p className="text-xs text-slate-600 leading-relaxed mb-4">
+              {/* Free Audit Helper Box */}
+              <div className="card-corporate p-6 bg-white border border-[#DCE5EF]">
+                <div className="flex items-center gap-2 mb-2">
+                  <ShieldCheck className="h-4 w-4 text-[#2878D0]" />
+                  <h3 className="text-sm font-bold text-[#102A43]">Looking for an audit instead?</h3>
+                </div>
+                <p className="text-xs text-[#66758A] leading-relaxed mb-4">
                   If you already have a website and want our team to review its speed, layout, and SEO before booking a project, request our free manual audit.
                 </p>
-                <a
+                <Link
                   href="/audit"
-                  className="text-xs font-semibold text-blue-600 hover:text-blue-700 inline-flex items-center gap-1"
+                  className="text-xs font-semibold text-[#2878D0] hover:text-[#123B63] inline-flex items-center gap-1 group"
                 >
                   <span>Request Free Website Audit</span>
-                  <ArrowRight className="h-3.5 w-3.5" />
-                </a>
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                </Link>
               </div>
             </div>
 
             {/* Right Column: Contact Form */}
             <div className="lg:col-span-7">
-              <div className="rounded-3xl border border-slate-200 bg-white p-8 sm:p-10 shadow-sm">
+              <div className="card-corporate bg-white p-8 sm:p-12 shadow-sm border border-[#DCE5EF]">
                 {status === "success" ? (
                   <div className="py-12 text-center space-y-4 animate-in fade-in duration-300">
-                    <div className="mx-auto h-14 w-14 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center">
-                      <CheckCircle2 className="h-8 w-8" />
+                    <div className="mx-auto h-16 w-16 rounded-full bg-[#F3F7FC] text-emerald-600 flex items-center justify-center border border-emerald-200">
+                      <CheckCircle2 className="h-9 w-9" />
                     </div>
-                    <h2 className="text-2xl font-bold text-slate-900">
+                    <h2 className="text-2xl font-extrabold text-[#102A43]">
                       Message Received!
                     </h2>
-                    <p className="text-base text-slate-600 max-w-md mx-auto leading-relaxed">
-                      Thank you for reaching out. A team member will review your project details and follow up directly via email within 24 hours.
+                    <p className="text-base text-[#66758A] max-w-md mx-auto leading-relaxed">
+                      Thank you for reaching out. A team member will review your project details and follow up directly via email within 24 business hours.
                     </p>
                     <button
                       type="button"
                       onClick={() => setStatus("idle")}
-                      className="mt-6 inline-flex items-center justify-center rounded-lg bg-slate-900 px-6 py-2.5 text-sm font-semibold text-white hover:bg-slate-800 transition"
+                      className="mt-6 inline-flex items-center justify-center rounded-xl bg-[#123B63] px-6 py-3 text-sm font-semibold text-white hover:bg-[#2878D0] transition shadow-sm"
                     >
                       Send Another Message
                     </button>
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-6">
+                    <div>
+                      <h2 className="text-2xl font-extrabold text-[#102A43] tracking-tight">
+                        Send Project Inquiry
+                      </h2>
+                      <p className="text-sm text-[#66758A] mt-1">
+                        Fill out the details below and we&apos;ll get back to you promptly.
+                      </p>
+                    </div>
+
                     {/* Honeypot field for bot prevention */}
                     <div className="hidden" aria-hidden="true">
                       <label htmlFor="hp_field">Do not fill this</label>
@@ -223,7 +306,7 @@ export default function ContactPage() {
                       <div>
                         <label
                           htmlFor="name"
-                          className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2"
+                          className="block text-xs font-bold uppercase tracking-wider text-[#102A43] mb-2"
                         >
                           Name <span className="text-rose-500">*</span>
                         </label>
@@ -235,7 +318,7 @@ export default function ContactPage() {
                           value={formData.name}
                           onChange={handleChange}
                           placeholder="Jane Smith"
-                          className="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition"
+                          className="w-full rounded-xl border border-[#DCE5EF] px-4 py-3.5 text-sm text-[#1B2738] placeholder-slate-400 focus:border-[#2878D0] focus:ring-1 focus:ring-[#2878D0] transition bg-white"
                         />
                       </div>
 
@@ -243,7 +326,7 @@ export default function ContactPage() {
                       <div>
                         <label
                           htmlFor="email"
-                          className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2"
+                          className="block text-xs font-bold uppercase tracking-wider text-[#102A43] mb-2"
                         >
                           Email <span className="text-rose-500">*</span>
                         </label>
@@ -255,7 +338,7 @@ export default function ContactPage() {
                           value={formData.email}
                           onChange={handleChange}
                           placeholder="jane@company.com"
-                          className="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition"
+                          className="w-full rounded-xl border border-[#DCE5EF] px-4 py-3.5 text-sm text-[#1B2738] placeholder-slate-400 focus:border-[#2878D0] focus:ring-1 focus:ring-[#2878D0] transition bg-white"
                         />
                       </div>
                     </div>
@@ -265,7 +348,7 @@ export default function ContactPage() {
                       <div>
                         <label
                           htmlFor="company"
-                          className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2"
+                          className="block text-xs font-bold uppercase tracking-wider text-[#102A43] mb-2"
                         >
                           Company <span className="text-slate-400 lowercase font-normal">(Optional)</span>
                         </label>
@@ -276,7 +359,7 @@ export default function ContactPage() {
                           value={formData.company}
                           onChange={handleChange}
                           placeholder="Acme Inc."
-                          className="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition"
+                          className="w-full rounded-xl border border-[#DCE5EF] px-4 py-3.5 text-sm text-[#1B2738] placeholder-slate-400 focus:border-[#2878D0] focus:ring-1 focus:ring-[#2878D0] transition bg-white"
                         />
                       </div>
 
@@ -284,7 +367,7 @@ export default function ContactPage() {
                       <div>
                         <label
                           htmlFor="service"
-                          className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2"
+                          className="block text-xs font-bold uppercase tracking-wider text-[#102A43] mb-2"
                         >
                           Service Needed <span className="text-rose-500">*</span>
                         </label>
@@ -294,7 +377,7 @@ export default function ContactPage() {
                           required
                           value={formData.service}
                           onChange={handleChange}
-                          className="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm text-slate-900 bg-white focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition"
+                          className="w-full rounded-xl border border-[#DCE5EF] px-4 py-3.5 text-sm text-[#1B2738] bg-white focus:border-[#2878D0] focus:ring-1 focus:ring-[#2878D0] transition"
                         >
                           <option value="">Select a service…</option>
                           <option value="Website development">Website development</option>
@@ -309,9 +392,9 @@ export default function ContactPage() {
                     <div>
                       <label
                         htmlFor="message"
-                        className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2"
+                        className="block text-xs font-bold uppercase tracking-wider text-[#102A43] mb-2"
                       >
-                        Message <span className="text-rose-500">*</span>
+                        Project Details & Goals <span className="text-rose-500">*</span>
                       </label>
                       <textarea
                         id="message"
@@ -321,7 +404,7 @@ export default function ContactPage() {
                         value={formData.message}
                         onChange={handleChange}
                         placeholder="Tell us what you're trying to build, key timeline requirements, or existing website links..."
-                        className="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition"
+                        className="w-full rounded-xl border border-[#DCE5EF] px-4 py-3.5 text-sm text-[#1B2738] placeholder-slate-400 focus:border-[#2878D0] focus:ring-1 focus:ring-[#2878D0] transition bg-white"
                       />
                     </div>
 
@@ -329,7 +412,7 @@ export default function ContactPage() {
                     <button
                       type="submit"
                       disabled={loading}
-                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg bg-blue-600 px-8 py-3.5 text-base font-semibold text-white shadow-md shadow-blue-500/20 hover:bg-blue-700 disabled:opacity-60 transition"
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-[#2878D0] px-8 py-4 text-base font-semibold text-white shadow-lg shadow-[#2878D0]/25 hover:bg-[#123B63] disabled:opacity-60 transition cursor-pointer"
                     >
                       {loading ? (
                         <>
@@ -339,7 +422,7 @@ export default function ContactPage() {
                       ) : (
                         <>
                           <span>Send Message</span>
-                          <ArrowRight className="h-4 w-4" />
+                          <Send className="h-4 w-4" />
                         </>
                       )}
                     </button>

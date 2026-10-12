@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight, CheckCircle2, Shield } from "lucide-react";
 
 interface CTASectionProps {
   headline?: string;
@@ -26,27 +26,33 @@ export const CTASection: React.FC<CTASectionProps> = ({
   ],
 }) => {
   return (
-    <section className="relative overflow-hidden bg-slate-900 py-16 sm:py-24 text-white">
-      {/* Decorative gradient glow */}
+    <section className="relative overflow-hidden bg-gradient-to-br from-[#102A43] via-[#123B63] to-[#102A43] py-20 sm:py-28 text-white">
+      {/* Decorative ambient lighting */}
       <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-blue-600/15 blur-[120px] pointer-events-none rounded-full"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-[#2878D0]/20 blur-[130px] pointer-events-none rounded-full"
         aria-hidden="true"
       />
 
       <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center">
+        {/* Trust badge */}
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-[#F3F7FC] text-xs font-semibold uppercase tracking-wider mb-6">
+          <Shield className="h-3.5 w-3.5 text-[#2878D0]" />
+          <span>Zero Obligation · 100% Honest Review</span>
+        </div>
+
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white max-w-3xl mx-auto leading-tight">
           {headline}
         </h2>
-        <p className="mt-4 sm:mt-6 text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
+        <p className="mt-5 text-base sm:text-lg text-[#DCE5EF] max-w-2xl mx-auto leading-relaxed font-normal">
           {subheadline}
         </p>
 
         {/* Benefits pills */}
         {benefits && benefits.length > 0 && (
-          <div className="mt-8 flex flex-wrap justify-center gap-4 sm:gap-6 text-xs sm:text-sm text-slate-300">
+          <div className="mt-8 flex flex-wrap justify-center gap-3 sm:gap-6 text-xs sm:text-sm text-[#F3F7FC]">
             {benefits.map((b) => (
-              <div key={b} className="flex items-center gap-1.5">
-                <CheckCircle2 className="h-4 w-4 text-blue-400 flex-shrink-0" />
+              <div key={b} className="flex items-center gap-2 bg-white/5 backdrop-blur-xs px-3.5 py-1.5 rounded-full border border-white/10">
+                <CheckCircle2 className="h-4 w-4 text-[#2878D0] flex-shrink-0" />
                 <span>{b}</span>
               </div>
             ))}
@@ -57,7 +63,7 @@ export const CTASection: React.FC<CTASectionProps> = ({
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link
             href={buttonHref}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg bg-blue-600 px-6 py-3.5 text-base font-semibold text-white shadow-lg shadow-blue-500/20 hover:bg-blue-500 transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-[#2878D0] px-7 py-4 text-base font-semibold text-white shadow-lg shadow-[#2878D0]/30 hover:bg-white hover:text-[#123B63] transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2878D0]"
           >
             <span>{buttonText}</span>
             <ArrowRight className="h-4 w-4" />
@@ -65,7 +71,7 @@ export const CTASection: React.FC<CTASectionProps> = ({
           {secondaryText && secondaryHref && (
             <Link
               href={secondaryHref}
-              className="w-full sm:w-auto inline-flex items-center justify-center rounded-lg border border-slate-700 bg-slate-800/60 px-6 py-3.5 text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-white transition"
+              className="w-full sm:w-auto inline-flex items-center justify-center rounded-xl border border-white/20 bg-white/5 backdrop-blur-sm px-7 py-4 text-base font-semibold text-white hover:bg-white/15 hover:border-white/40 transition"
             >
               {secondaryText}
             </Link>

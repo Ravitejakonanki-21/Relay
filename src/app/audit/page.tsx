@@ -1,7 +1,19 @@
 "use client";
 
 import React, { useState } from "react";
-import { CheckCircle2, AlertCircle, Loader2, ArrowRight, ShieldCheck, Mail, Zap, Smartphone, Search, MousePointerClick } from "lucide-react";
+import {
+  CheckCircle2,
+  AlertCircle,
+  Loader2,
+  ArrowRight,
+  ShieldCheck,
+  Mail,
+  Zap,
+  Smartphone,
+  Search,
+  MousePointerClick,
+  Sparkles,
+} from "lucide-react";
 
 export default function AuditPage() {
   const [formData, setFormData] = useState({
@@ -92,49 +104,67 @@ export default function AuditPage() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Header */}
-      <section className="bg-slate-50/70 border-b border-slate-200/80 pt-16 pb-20 sm:pt-24 sm:pb-28">
+      {/* 1. HERO SECTION */}
+      <section className="bg-white border-b border-[#DCE5EF] pt-16 pb-20 sm:pt-24 sm:pb-28 relative overflow-hidden">
+        {/* Subtle grid pattern background */}
+        <div
+          className="absolute inset-0 bg-[linear-gradient(to_right,#F3F7FC_1px,transparent_1px),linear-gradient(to_bottom,#F3F7FC_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] -z-10"
+          aria-hidden="true"
+        />
+
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center max-w-4xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-semibold uppercase tracking-wider mb-6">
-            Free Website Audit
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F3F7FC] border border-[#DCE5EF] text-[#123B63] text-xs font-semibold uppercase tracking-wider mb-6 shadow-xs">
+            <Sparkles className="h-3.5 w-3.5 text-[#2878D0]" />
+            <span>Free Website Audit</span>
           </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-tight">
+
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#102A43] leading-tight">
             Know exactly what your website is costing you.
           </h1>
-          <p className="mt-6 text-lg sm:text-xl text-slate-600 leading-relaxed max-w-2xl mx-auto">
+
+          <p className="mt-6 text-lg sm:text-xl text-[#66758A] leading-relaxed max-w-2xl mx-auto">
             Tell us about your business and website. A human engineer on our team reviews it manually and emails you a prioritized list of improvements.
           </p>
         </div>
       </section>
 
-      {/* Main Audit Content */}
-      <section className="py-20 bg-white">
+      {/* 2. MAIN AUDIT CONTENT */}
+      <section className="py-20 sm:py-28 bg-[#F3F7FC]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             {/* Form Column */}
             <div className="lg:col-span-7">
-              <div className="rounded-3xl border border-slate-200 bg-white p-8 sm:p-10 shadow-sm">
+              <div className="card-corporate bg-white p-8 sm:p-12 shadow-sm border border-[#DCE5EF]">
                 {status === "success" ? (
                   <div className="py-12 text-center space-y-4 animate-in fade-in duration-300">
-                    <div className="mx-auto h-14 w-14 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center">
-                      <CheckCircle2 className="h-8 w-8" />
+                    <div className="mx-auto h-16 w-16 rounded-full bg-[#F3F7FC] text-emerald-600 flex items-center justify-center border border-emerald-200">
+                      <CheckCircle2 className="h-9 w-9" />
                     </div>
-                    <h2 className="text-2xl font-bold text-slate-900">
+                    <h2 className="text-2xl font-extrabold text-[#102A43]">
                       Audit Request Received!
                     </h2>
-                    <p className="text-base text-slate-600 max-w-md mx-auto leading-relaxed">
+                    <p className="text-base text-[#66758A] max-w-md mx-auto leading-relaxed">
                       Thank you. An engineer on our team will inspect your website across mobile performance, conversion hierarchy, and Core Web Vitals, and email your breakdown within 2 business days.
                     </p>
                     <button
                       type="button"
                       onClick={() => setStatus("idle")}
-                      className="mt-6 inline-flex items-center justify-center rounded-lg bg-slate-900 px-6 py-2.5 text-sm font-semibold text-white hover:bg-slate-800 transition"
+                      className="mt-6 inline-flex items-center justify-center rounded-xl bg-[#123B63] px-6 py-3 text-sm font-semibold text-white hover:bg-[#2878D0] transition shadow-sm"
                     >
                       Submit Another Audit
                     </button>
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-6">
+                    <div>
+                      <h2 className="text-2xl font-extrabold text-[#102A43] tracking-tight">
+                        Request Manual Review
+                      </h2>
+                      <p className="text-sm text-[#66758A] mt-1">
+                        Zero obligation · 100% human engineer analysis
+                      </p>
+                    </div>
+
                     {/* Honeypot field */}
                     <div className="hidden" aria-hidden="true">
                       <label htmlFor="audit_hp">Do not fill this</label>
@@ -163,7 +193,7 @@ export default function AuditPage() {
                     <div>
                       <label
                         htmlFor="name"
-                        className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2"
+                        className="block text-xs font-bold uppercase tracking-wider text-[#102A43] mb-2"
                       >
                         Your Name <span className="text-rose-500">*</span>
                       </label>
@@ -175,7 +205,7 @@ export default function AuditPage() {
                         value={formData.name}
                         onChange={handleChange}
                         placeholder="Jane Smith"
-                        className="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition"
+                        className="w-full rounded-xl border border-[#DCE5EF] px-4 py-3.5 text-sm text-[#1B2738] placeholder-slate-400 focus:border-[#2878D0] focus:ring-1 focus:ring-[#2878D0] transition bg-white"
                       />
                     </div>
 
@@ -183,7 +213,7 @@ export default function AuditPage() {
                     <div>
                       <label
                         htmlFor="businessName"
-                        className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2"
+                        className="block text-xs font-bold uppercase tracking-wider text-[#102A43] mb-2"
                       >
                         Business Name <span className="text-rose-500">*</span>
                       </label>
@@ -195,7 +225,7 @@ export default function AuditPage() {
                         value={formData.businessName}
                         onChange={handleChange}
                         placeholder="Acme Dental"
-                        className="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition"
+                        className="w-full rounded-xl border border-[#DCE5EF] px-4 py-3.5 text-sm text-[#1B2738] placeholder-slate-400 focus:border-[#2878D0] focus:ring-1 focus:ring-[#2878D0] transition bg-white"
                       />
                     </div>
 
@@ -203,7 +233,7 @@ export default function AuditPage() {
                     <div>
                       <label
                         htmlFor="websiteUrl"
-                        className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2"
+                        className="block text-xs font-bold uppercase tracking-wider text-[#102A43] mb-2"
                       >
                         Website URL <span className="text-rose-500">*</span>
                       </label>
@@ -215,7 +245,7 @@ export default function AuditPage() {
                         value={formData.websiteUrl}
                         onChange={handleChange}
                         placeholder="yourbusiness.com"
-                        className="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition"
+                        className="w-full rounded-xl border border-[#DCE5EF] px-4 py-3.5 text-sm text-[#1B2738] placeholder-slate-400 focus:border-[#2878D0] focus:ring-1 focus:ring-[#2878D0] transition bg-white"
                       />
                     </div>
 
@@ -223,7 +253,7 @@ export default function AuditPage() {
                     <div>
                       <label
                         htmlFor="email"
-                        className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2"
+                        className="block text-xs font-bold uppercase tracking-wider text-[#102A43] mb-2"
                       >
                         Business Email <span className="text-rose-500">*</span>
                       </label>
@@ -235,7 +265,7 @@ export default function AuditPage() {
                         value={formData.email}
                         onChange={handleChange}
                         placeholder="you@yourbusiness.com"
-                        className="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition"
+                        className="w-full rounded-xl border border-[#DCE5EF] px-4 py-3.5 text-sm text-[#1B2738] placeholder-slate-400 focus:border-[#2878D0] focus:ring-1 focus:ring-[#2878D0] transition bg-white"
                       />
                     </div>
 
@@ -243,7 +273,7 @@ export default function AuditPage() {
                     <div>
                       <label
                         htmlFor="focus"
-                        className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2"
+                        className="block text-xs font-bold uppercase tracking-wider text-[#102A43] mb-2"
                       >
                         What should we focus on? <span className="text-slate-400 lowercase font-normal">(Optional)</span>
                       </label>
@@ -254,7 +284,7 @@ export default function AuditPage() {
                         value={formData.focus}
                         onChange={handleChange}
                         placeholder="e.g. Our site feels slow on phones and we get few inquiries from it."
-                        className="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition"
+                        className="w-full rounded-xl border border-[#DCE5EF] px-4 py-3.5 text-sm text-[#1B2738] placeholder-slate-400 focus:border-[#2878D0] focus:ring-1 focus:ring-[#2878D0] transition bg-white"
                       />
                     </div>
 
@@ -263,7 +293,7 @@ export default function AuditPage() {
                       <button
                         type="submit"
                         disabled={loading}
-                        className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg bg-blue-600 px-8 py-3.5 text-base font-semibold text-white shadow-md shadow-blue-500/20 hover:bg-blue-700 disabled:opacity-60 transition"
+                        className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-[#2878D0] px-8 py-4 text-base font-semibold text-white shadow-lg shadow-[#2878D0]/25 hover:bg-[#123B63] disabled:opacity-60 transition cursor-pointer"
                       >
                         {loading ? (
                           <>
@@ -279,7 +309,7 @@ export default function AuditPage() {
                       </button>
                     </div>
 
-                    <p className="text-xs text-slate-500">
+                    <p className="text-xs text-[#66758A]">
                       Your details are used only to prepare and deliver your audit. No spam, ever.
                     </p>
                   </form>
@@ -290,76 +320,76 @@ export default function AuditPage() {
             {/* Checklist & Delivery Expectations Column */}
             <div className="lg:col-span-5 space-y-8">
               {/* What We Check */}
-              <div className="rounded-3xl border border-slate-200 bg-slate-50/70 p-8">
-                <h2 className="text-lg font-bold text-slate-900 tracking-tight mb-6">
+              <div className="card-corporate bg-white p-8 border border-[#DCE5EF]">
+                <h2 className="text-lg font-bold text-[#102A43] tracking-tight mb-6">
                   What we check
                 </h2>
                 <ul className="space-y-4">
                   <li className="flex items-start gap-3">
-                    <div className="h-8 w-8 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <div className="h-8 w-8 rounded-lg bg-[#F3F7FC] text-[#2878D0] flex items-center justify-center flex-shrink-0 mt-0.5 border border-[#DCE5EF]">
                       <Zap className="h-4 w-4" />
                     </div>
                     <div>
-                      <h3 className="text-sm font-semibold text-slate-900">
+                      <h3 className="text-sm font-semibold text-[#102A43]">
                         Speed & Core Web Vitals signals
                       </h3>
-                      <p className="text-xs text-slate-500 mt-0.5">
+                      <p className="text-xs text-[#66758A] mt-0.5">
                         LCP, CLS layout shifts, asset weight, and mobile throttle benchmarks.
                       </p>
                     </div>
                   </li>
 
                   <li className="flex items-start gap-3">
-                    <div className="h-8 w-8 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <div className="h-8 w-8 rounded-lg bg-[#F3F7FC] text-[#2878D0] flex items-center justify-center flex-shrink-0 mt-0.5 border border-[#DCE5EF]">
                       <Smartphone className="h-4 w-4" />
                     </div>
                     <div>
-                      <h3 className="text-sm font-semibold text-slate-900">
+                      <h3 className="text-sm font-semibold text-[#102A43]">
                         Mobile & responsive behavior
                       </h3>
-                      <p className="text-xs text-slate-500 mt-0.5">
+                      <p className="text-xs text-[#66758A] mt-0.5">
                         Touch targets, readable font scaling, and smooth small-screen layout.
                       </p>
                     </div>
                   </li>
 
                   <li className="flex items-start gap-3">
-                    <div className="h-8 w-8 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <div className="h-8 w-8 rounded-lg bg-[#F3F7FC] text-[#2878D0] flex items-center justify-center flex-shrink-0 mt-0.5 border border-[#DCE5EF]">
                       <Search className="h-4 w-4" />
                     </div>
                     <div>
-                      <h3 className="text-sm font-semibold text-slate-900">
+                      <h3 className="text-sm font-semibold text-[#102A43]">
                         SEO fundamentals
                       </h3>
-                      <p className="text-xs text-slate-500 mt-0.5">
+                      <p className="text-xs text-[#66758A] mt-0.5">
                         Title tags, meta descriptions, semantic headings, and search indexability.
                       </p>
                     </div>
                   </li>
 
                   <li className="flex items-start gap-3">
-                    <div className="h-8 w-8 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <div className="h-8 w-8 rounded-lg bg-[#F3F7FC] text-[#2878D0] flex items-center justify-center flex-shrink-0 mt-0.5 border border-[#DCE5EF]">
                       <MousePointerClick className="h-4 w-4" />
                     </div>
                     <div>
-                      <h3 className="text-sm font-semibold text-slate-900">
+                      <h3 className="text-sm font-semibold text-[#102A43]">
                         UX & conversion path review
                       </h3>
-                      <p className="text-xs text-slate-500 mt-0.5">
+                      <p className="text-xs text-[#66758A] mt-0.5">
                         Clarity of calls-to-action, form friction, and customer trust signals.
                       </p>
                     </div>
                   </li>
 
                   <li className="flex items-start gap-3">
-                    <div className="h-8 w-8 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <div className="h-8 w-8 rounded-lg bg-[#F3F7FC] text-[#2878D0] flex items-center justify-center flex-shrink-0 mt-0.5 border border-[#DCE5EF]">
                       <ShieldCheck className="h-4 w-4" />
                     </div>
                     <div>
-                      <h3 className="text-sm font-semibold text-slate-900">
+                      <h3 className="text-sm font-semibold text-[#102A43]">
                         AI-readiness for future voice agents
                       </h3>
-                      <p className="text-xs text-slate-500 mt-0.5">
+                      <p className="text-xs text-[#66758A] mt-0.5">
                         Clarity of business hours, booking paths, and FAQ answers.
                       </p>
                     </div>
@@ -368,18 +398,18 @@ export default function AuditPage() {
               </div>
 
               {/* How Audits are Delivered */}
-              <div className="rounded-3xl border border-slate-200 bg-white p-8">
-                <h2 className="text-lg font-bold text-slate-900 tracking-tight mb-3">
+              <div className="card-corporate bg-white p-8 border border-[#DCE5EF]">
+                <h2 className="text-lg font-bold text-[#102A43] tracking-tight mb-3">
                   How audits are delivered
                 </h2>
-                <p className="text-sm text-slate-600 leading-relaxed">
+                <p className="text-sm text-[#66758A] leading-relaxed">
                   Audits are reviewed by a person, not an automated generic script. We don&apos;t generate fake automated scores and we won&apos;t pretend a machine reviewed your site.
                 </p>
-                <p className="text-sm text-slate-600 leading-relaxed mt-3">
+                <p className="text-sm text-[#66758A] leading-relaxed mt-3">
                   Your request is sent to our engineering team, manually reviewed, and a prioritized action report comes straight back to your business email inbox.
                 </p>
-                <div className="mt-6 flex items-center gap-2 text-xs font-semibold text-slate-700 bg-slate-50 px-4 py-2.5 rounded-lg border border-slate-200">
-                  <Mail className="h-4 w-4 text-blue-600" />
+                <div className="mt-6 flex items-center gap-2 text-xs font-semibold text-[#102A43] bg-[#F3F7FC] px-4 py-2.5 rounded-lg border border-[#DCE5EF]">
+                  <Mail className="h-4 w-4 text-[#2878D0]" />
                   <span>Delivered by email — no account creation needed.</span>
                 </div>
               </div>

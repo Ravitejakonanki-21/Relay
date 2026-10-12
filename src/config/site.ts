@@ -13,14 +13,15 @@ export interface BrandConfig {
     badgeText?: string;
   };
   colors: {
-    primary: string; // Dark Navy #0B132B / #0F172A
-    primaryLight: string; // Slate #1E293B
-    accent: string; // Electric / Vibrant Blue #2563EB
-    accentHover: string; // #1D4ED8
-    accentSoft: string; // #EFF6FF
-    background: string; // #FFFFFF
-    backgroundMuted: string; // #F8FAFC
-    borderSubtle: string; // #E2E8F0
+    primary: string; // Primary corporate navy #123B63
+    accent: string; // Primary accent blue #2878D0
+    heading: string; // Deep navy for strong headings #102A43
+    backgroundSoft: string; // Soft blue backgrounds #F3F7FC
+    background: string; // Pure white #FFFFFF
+    textPrimary: string; // Primary text #1B2738
+    textSecondary: string; // Secondary text #66758A
+    border: string; // Borders #DCE5EF
+    gradient: string; // linear-gradient(135deg, #123B63, #2878D0)
   };
   socialLinks: {
     twitter?: string;
@@ -63,14 +64,15 @@ export const siteConfig: BrandConfig = {
     text: "Relay",
   },
   colors: {
-    primary: "#0A1128",
-    primaryLight: "#1E293B",
-    accent: "#2563EB",
-    accentHover: "#1D4ED8",
-    accentSoft: "#EFF6FF",
-    background: "#FFFFFF",
-    backgroundMuted: "#F8FAFC",
-    borderSubtle: "#E2E8F0",
+    primary: "#123B63", // Primary corporate navy
+    accent: "#2878D0", // Primary accent blue
+    heading: "#102A43", // Deep navy for strong headings
+    backgroundSoft: "#F3F7FC", // Soft blue backgrounds
+    background: "#FFFFFF", // Pure white
+    textPrimary: "#1B2738", // Primary text
+    textSecondary: "#66758A", // Secondary text
+    border: "#DCE5EF", // Borders
+    gradient: "linear-gradient(135deg, #123B63, #2878D0)",
   },
   socialLinks: {
     twitter: "https://twitter.com",
