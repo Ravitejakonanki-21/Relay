@@ -197,6 +197,7 @@ export async function POST(request: Request) {
     const adminEmailResult = await resend.emails.send({
       from: resendFromEmail,
       to: auditNotificationEmail,
+      replyTo: sanitizedEmail,
       subject: `New Website Audit Request: ${sanitizedBusinessName} (${sanitizedName})`,
       html: notificationHtml,
     });

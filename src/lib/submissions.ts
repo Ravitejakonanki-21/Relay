@@ -69,11 +69,12 @@ export async function saveSubmission(
       }
     }
 
-    // Optional Email notification dispatch via Resend / Webhook if configured
+    // Optional Email notification dispatch via Resend for contact inquiries
     const resendApiKey = process.env.RESEND_API_KEY;
-    const targetEmail = process.env.NOTIFICATION_EMAIL || "hello@relaydigital.co";
+    const targetEmail = process.env.AUDIT_NOTIFICATION_EMAIL || process.env.NOTIFICATION_EMAIL || "relaystudio.team@gmail.com";
+    const resendFromEmail = process.env.RESEND_FROM_EMAIL || "Relay Contact <onboarding@resend.dev>";
 
-    if (resendApiKey) {
+    if (resendApiKey && type === "contact") {
       try {
         await fetch("https://api.resend.com/emails", {
           method: "POST",
@@ -82,9 +83,10 @@ export async function saveSubmission(
             Authorization: `Bearer ${resendApiKey}`,
           },
           body: JSON.stringify({
-            from: "Relay Notifications <notifications@relaydigital.co>",
+            from: resendFromEmail,
             to: [targetEmail],
-            subject: `New ${type.toUpperCase()} Submission: ${payload.businessName || payload.name || "Inquiry"}`,
+            reply_to: typeof payload.email === "string" ? payload.email : undefined,
+            subject: `New Contact Inquiry: ${payload.name || "Client"} (${payload.service || "General"})`,
             text: JSON.stringify(payload, null, 2),
           }),
         });
