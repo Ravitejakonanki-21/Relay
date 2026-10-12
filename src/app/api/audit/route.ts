@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import { saveSubmission } from "@/lib/submissions";
 
 // In-memory rate limiting map (IP -> timestamp[])
 const rateLimitMap = new Map<string, number[]>();
@@ -183,12 +184,24 @@ export async function POST(request: Request) {
       </div>
     `;
 
+    // Save submission as persistent fallback
+    await saveSubmission("audit", {
+      name: sanitizedName,
+      businessName: sanitizedBusinessName,
+      websiteUrl: sanitizedUrl,
+      email: sanitizedEmail,
+      focus: sanitizedFocus,
+      submittedAt: submissionTime,
+    });
+
     const adminEmailResult = await resend.emails.send({
       from: resendFromEmail,
       to: auditNotificationEmail,
       subject: `New Website Audit Request: ${sanitizedBusinessName} (${sanitizedName})`,
       html: notificationHtml,
     });
+
+    console.log("[Resend Admin Email Result]:", JSON.stringify(adminEmailResult));
 
     if (adminEmailResult.error) {
       console.error("[Resend Admin Email Failed]:", adminEmailResult.error);
@@ -249,6 +262,11 @@ export async function POST(request: Request) {
     return NextResponse.json({
       success: true,
       message: "Audit request received! Our team will manually review your site and email you.",
+      delivery: {
+        id: adminEmailResult.data?.id || null,
+        recipient: auditNotificationEmail,
+        sender: resendFromEmail,
+      },
     });
   } catch (error) {
     console.error("[API Audit Error]:", error);
